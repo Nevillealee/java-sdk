@@ -16,33 +16,43 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gson.annotations.SerializedName;
 import com.ibm.watson.developer_cloud.service.model.GenericModel;
 import com.ibm.watson.developer_cloud.util.Validator;
 
 /**
- * CreateValue.
+ * the createValue options.
  */
-public class CreateValue extends GenericModel {
+public class CreateValueOptions extends GenericModel {
 
-  /** The text of the entity value. */
-  private String value;
+  /** The workspace ID. */
+  @SerializedName("workspace_id")
+  private String workspaceId;
+  /** The name of the entity. */
+  private String entity;
   /** Any metadata related to the entity value. */
   private Map<String, Object> metadata;
   /** An array of synonyms for the entity value. */
   private List<String> synonyms;
+  /** The text of the entity value. */
+  private String value;
 
   /**
    * Builder.
    */
   public static class Builder {
-    private String value;
+    private String workspaceId;
+    private String entity;
     private Map<String, Object> metadata;
     private List<String> synonyms;
+    private String value;
 
-    private Builder(CreateValue createValue) {
-      value = createValue.value;
-      metadata = createValue.metadata;
-      synonyms = createValue.synonyms;
+    private Builder(CreateValueOptions createValueOptions) {
+      workspaceId = createValueOptions.workspaceId;
+      entity = createValueOptions.entity;
+      metadata = createValueOptions.metadata;
+      synonyms = createValueOptions.synonyms;
+      value = createValueOptions.value;
     }
 
     /**
@@ -53,28 +63,32 @@ public class CreateValue extends GenericModel {
     /**
      * Instantiates a new builder with required properties.
      *
+     * @param workspaceId the workspaceId
+     * @param entity the entity
      * @param value the value
      */
-    public Builder(String value) {
+    public Builder(String workspaceId, String entity, String value) {
+      this.workspaceId = workspaceId;
+      this.entity = entity;
       this.value = value;
     }
 
     /**
-     * Builds a CreateValue.
+     * Builds a CreateValueOptions.
      *
-     * @return the createValue
+     * @return the createValueOptions
      */
-    public CreateValue build() {
-      return new CreateValue(this);
+    public CreateValueOptions build() {
+      return new CreateValueOptions(this);
     }
 
     /**
      * Adds an synonym to synonyms.
      *
      * @param synonym the new synonym
-     * @return the CreateValue builder
+     * @return the CreateValueOptions builder
      */
-    public Builder synonyms(String synonym) {
+    public Builder addSynonym(String synonym) {
       if (this.synonyms == null) {
         this.synonyms = new ArrayList<String>();
       }
@@ -83,13 +97,24 @@ public class CreateValue extends GenericModel {
     }
 
     /**
-     * Set the value.
+     * Set the workspaceId.
      *
-     * @param value the value
-     * @return the CreateValue builder
+     * @param workspaceId the workspaceId
+     * @return the CreateValueOptions builder
      */
-    public Builder value(String value) {
-      this.value = value;
+    public Builder workspaceId(String workspaceId) {
+      this.workspaceId = workspaceId;
+      return this;
+    }
+
+    /**
+     * Set the entity.
+     *
+     * @param entity the entity
+     * @return the CreateValueOptions builder
+     */
+    public Builder entity(String entity) {
+      this.entity = entity;
       return this;
     }
 
@@ -97,7 +122,7 @@ public class CreateValue extends GenericModel {
      * Set the metadata.
      *
      * @param metadata the metadata
-     * @return the CreateValue builder
+     * @return the CreateValueOptions builder
      */
     public Builder metadata(Map<String, Object> metadata) {
       this.metadata = metadata;
@@ -109,37 +134,61 @@ public class CreateValue extends GenericModel {
      * Existing synonyms will be replaced.
      *
      * @param synonyms the synonyms
-     * @return the CreateValue builder
+     * @return the CreateValueOptions builder
      */
     public Builder synonyms(List<String> synonyms) {
       this.synonyms = synonyms;
       return this;
     }
+
+    /**
+     * Set the value.
+     *
+     * @param value the value
+     * @return the CreateValueOptions builder
+     */
+    public Builder value(String value) {
+      this.value = value;
+      return this;
+    }
   }
 
-  private CreateValue(Builder builder) {
+  private CreateValueOptions(Builder builder) {
+    Validator.notNull(builder.workspaceId, "workspaceId cannot be null");
+    Validator.notNull(builder.entity, "entity cannot be null");
     Validator.notNull(builder.value, "value cannot be null");
-    value = builder.value;
+    workspaceId = builder.workspaceId;
+    entity = builder.entity;
     metadata = builder.metadata;
     synonyms = builder.synonyms;
+    value = builder.value;
   }
 
   /**
    * New builder.
    *
-   * @return a CreateValue builder
+   * @return a CreateValueOptions builder
    */
   public Builder newBuilder() {
     return new Builder(this);
   }
 
   /**
-   * Gets the value.
+   * Gets the workspaceId.
    *
-   * @return the value
+   * @return the workspaceId
    */
-  public String value() {
-    return value;
+  public String workspaceId() {
+    return workspaceId;
+  }
+
+  /**
+   * Gets the entity.
+   *
+   * @return the entity
+   */
+  public String entity() {
+    return entity;
   }
 
   /**
@@ -158,5 +207,14 @@ public class CreateValue extends GenericModel {
    */
   public List<String> synonyms() {
     return synonyms;
+  }
+
+  /**
+   * Gets the value.
+   *
+   * @return the value
+   */
+  public String value() {
+    return value;
   }
 }

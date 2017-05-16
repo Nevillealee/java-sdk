@@ -50,7 +50,16 @@ public class CreateIntent extends GenericModel {
     public Builder() { }
 
     /**
-     * Builds the CreateIntent.
+     * Instantiates a new builder with required properties.
+     *
+     * @param intent the intent
+     */
+    public Builder(String intent) {
+      this.intent = intent;
+    }
+
+    /**
+     * Builds a CreateIntent.
      *
      * @return the createIntent
      */
@@ -59,16 +68,16 @@ public class CreateIntent extends GenericModel {
     }
 
     /**
-     * Adds an examples to examples.
+     * Adds an example to examples.
      *
-     * @param examples the new examples
-     * @return the builder
+     * @param example the new example
+     * @return the CreateIntent builder
      */
-    public Builder examples(CreateExample examples) {
+    public Builder examples(CreateExample example) {
       if (this.examples == null) {
         this.examples = new ArrayList<CreateExample>();
       }
-      this.examples.add(examples);
+      this.examples.add(example);
       return this;
     }
 
@@ -76,7 +85,7 @@ public class CreateIntent extends GenericModel {
      * Set the intent.
      *
      * @param intent the intent
-     * @return a CreateIntent Builder
+     * @return the CreateIntent builder
      */
     public Builder intent(String intent) {
       this.intent = intent;
@@ -87,7 +96,7 @@ public class CreateIntent extends GenericModel {
      * Set the description.
      *
      * @param description the description
-     * @return a CreateIntent Builder
+     * @return the CreateIntent builder
      */
     public Builder description(String description) {
       this.description = description;
@@ -99,7 +108,7 @@ public class CreateIntent extends GenericModel {
      * Existing examples will be replaced.
      *
      * @param examples the examples
-     * @return a CreateIntent Builder
+     * @return the CreateIntent builder
      */
     public Builder examples(List<CreateExample> examples) {
       this.examples = examples;
@@ -117,7 +126,7 @@ public class CreateIntent extends GenericModel {
   /**
    * New builder.
    *
-   * @return the builder
+   * @return a CreateIntent builder
    */
   public Builder newBuilder() {
     return new Builder(this);
